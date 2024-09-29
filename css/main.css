@@ -1,0 +1,83 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    color: #052c65;
+}
+
+:root {
+    --bs-link-color: #052c65; /* Новый цвет для ссылок nav */
+}
+
+.custom-sidebar {
+    height: 100vh;
+}
+
+.logo {
+    margin: 0 auto;
+    width: 100%;
+    padding-top: 40px;
+    padding-bottom: 20px;
+}
+
+.logo img {
+    width: 98px;
+    height: 40px;
+}
+
+.custom-sidebar-main-panel {
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.custom-sidebar-main-panel {
+    margin-top: 60px;
+}
+
+.nav {
+    margin-left: 20px;
+    margin-right: 20px;
+
+    width: 178px;
+}
+
+.nav-pills .nav-link {
+    min-width: 178px;
+}
+
+.nav-link img {
+    vertical-align: baseline;
+    margin-right: 1px;
+}
+
+.custom-balance {
+    margin-bottom: 20px;
+    margin-left: 20px;
+    font-weight: 600;
+}
+
+.custom-user {
+    padding-top: 26px;
+}
+
+.custom-user img {
+    margin-right: 16px;
+}
+
+.custom-balance span {
+    color: #0d6efd
+}
+
+.page-name {
+    font-size: 40px;
+    font-weight: 500;
+    margin-top: 100px;
+    margin-left: 60px;
+    margin-bottom: 60px;
+}
