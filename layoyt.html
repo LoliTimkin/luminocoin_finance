@@ -69,7 +69,6 @@
 
     <div class="col-10">
         <header>
-
             <div class="page-name">
                 Главная
             </div>
@@ -81,19 +80,23 @@
                 <button type="button" class="btn btn-outline-secondary btn-sm">Все</button>
                 <button type="button" class="btn btn-outline-secondary btn-sm">Интервал</button>
                 <span>c</span>
-                <span>Дата</span>
+                <button type="button" class="btn custom-text-color">Дата</button>
                 <span>по</span>
-                <span>Дата</span>
+                <button type="button" class="btn custom-text-color">Дата</button>
             </div>
 
         </header>
 
         <div class="row">
             <div class="col-5 border-end">
-                col-5
+                <div>
+                    <canvas id="myChart"></canvas>
+                </div>
             </div>
             <div class="col-5">
-                col-5
+                <div>
+                    <canvas id="myChart2"></canvas>
+                </div>
             </div>
         </div>
     </div>
@@ -101,5 +104,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="scripts/main.js"></script>
+
 </body>
 </html>
