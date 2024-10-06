@@ -1,0 +1,100 @@
+
+:root {
+    --bs-link-color: #052c65; /* Новый цвет для ссылок nav */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    color: #052c65;
+}
+
+.logo {
+    padding-top: 40px;
+    padding-bottom: 20px;
+    margin-bottom: 60px;
+}
+
+.logo img {
+    width: 98px;
+    height: 40px;
+}
+
+.custom-sidebar {
+    height: 100vh
+}
+
+.custom-sidebar-panel {
+    height: 40%;
+}
+
+.row .nav {
+    padding-right: 0;
+}
+
+.nav {
+    margin: 0 auto;
+    min-width: 178px;
+}
+
+.nav-pills .nav-link {
+    min-width: 178px;
+}
+
+.nav-link img {
+    vertical-align: baseline;
+    margin-right: 1px;
+}
+
+.custom-balance {
+    margin-bottom: 20px;
+    margin-left: 8px;
+    font-weight: 600;
+}
+
+
+.custom-balance span {
+    color: #0d6efd
+}
+
+.custom-user {
+    padding: 20px 20px 40px;
+}
+
+.custom-user img {
+    margin-right: 16px;
+}
+
+.content {
+    padding: 0 48px;
+}
+
+.custom-page-name {
+    font-size: 40px;
+    font-weight: 500;
+    margin-top: 100px;
+    margin-bottom: 40px;
+}
+
+.card {
+    padding: 4px;
+}
+
+.card-title  {
+   color: #290661
+}
+
+.card .btn {
+    font-size: 14px;
+    padding: 11px 16px;
+}
+
+.card .btn-danger {
+    margin-left: 10px;
+}
+
