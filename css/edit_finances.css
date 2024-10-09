@@ -39,17 +39,41 @@ body {
 
 .nav {
     margin: 0 auto;
-    min-width: 178px;
+    min-width: 193px;
 }
 
 .nav-pills .nav-link {
-    min-width: 178px;
+    min-width: 193px;
+}
+
+.nav-item {
+
 }
 
 .nav-link img {
     vertical-align: baseline;
     margin-right: 1px;
 }
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+.custom-dropdown-toggle {
+    height: 13px;
+    margin-right: 16px;
+    display: inline-block;
+}
+
+.custom-nav-link {
+    display: flex;
+    align-items: center; /* Выровнять текст и картинку по центру по вертикали */
+}
+
+.custom-nav-link img  {
+    margin-left: auto; /* Сдвиг изображения вправо */
+}
+
 
 .custom-balance {
     margin-bottom: 20px;
@@ -81,47 +105,40 @@ body {
     margin-bottom: 40px;
 }
 
-.card {
-    padding: 4px;
+.form-control {
+    width: 397px;
+    padding: 6px 16px;
+    box-sizing: border-box;
 }
 
-.card-title  {
-   color: #290661
+
+.form-control::placeholder {
+    font-size: 15px;
+    color: black;
 }
 
-.card .btn {
+.custom-action {
+    margin-top: 25px;
+}
+
+.custom-action .btn {
     font-size: 14px;
-    padding: 11px 16px;
+    font-weight: 500;
+    padding: 9px 15px;
 }
 
-.card .btn-danger {
+.custom-action .btn-danger {
     margin-left: 10px;
 }
 
-.modal-content {
-    width: 578px;
-    padding: 24px;
+.custom-nav-item-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /*padding: 16px;*/
 }
 
-.modal-body {
-    width: 532px;
-    color: #290661;
-    font-size: 20px;
-}
 
-.modal-footer {
-    border-top: 0;
-    justify-content: center;
-    padding: 4px;
-    margin-bottom: 8px;
 
-}
 
-.modal-footer .btn {
-    font-size: 14px;
-}
-
-.modal-footer .btn-danger {
-    margin-left: 8px;
-}
 
