@@ -1,3 +1,4 @@
+/*
 * {
     margin: 0;
     padding: 0;
@@ -10,7 +11,7 @@ body {
 }
 
 :root {
-    --bs-link-color: #052c65; /* Новый цвет для ссылок nav */
+    --bs-link-color: #052c65; !* Новый цвет для ссылок nav *!
 }
 
 .container-fluid {
@@ -19,7 +20,7 @@ body {
 
 .custom-sidebar {
     height: 100vh;
-    /*height: 100%;*/
+    !*height: 100%;*!
 }
 
 .logo {
@@ -51,8 +52,8 @@ body {
 }
 
 .nav {
-    /*margin-left: 20px;*/
-    /*margin-right: 20px;*/
+    !*margin-left: 20px;*!
+    !*margin-right: 20px;*!
     margin: 0 auto;
     width: 178px;
 }
@@ -83,6 +84,7 @@ body {
 .custom-balance span {
     color: #0d6efd
 }
+*/
 
 .content {
     overflow-y: auto;

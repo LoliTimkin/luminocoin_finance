@@ -65,10 +65,6 @@ body {
     display: inline-block;
 }
 
-.show .custom-dropdown-toggle {
-    transform: rotate(90deg);
-}
-
 .custom-nav-link {
     display: flex;
     align-items: center; /* Выровнять текст и картинку по центру по вертикали */
@@ -78,11 +74,13 @@ body {
     margin-left: auto; /* Сдвиг изображения вправо */
 }
 
+
 .custom-balance {
     margin-bottom: 20px;
     margin-left: 8px;
     font-weight: 600;
 }
+
 
 .custom-balance span {
     color: #0d6efd
@@ -95,45 +93,3 @@ body {
 .custom-user img {
     margin-right: 16px;
 }
-
-.content {
-    padding: 0 48px;
-}
-
-.custom-page-name {
-    font-size: 40px;
-    font-weight: 500;
-    margin-top: 100px;
-    margin-bottom: 40px;
-}
-
-.form-control {
-    width: 397px;
-    padding: 6px 16px;
-    box-sizing: border-box;
-}
-
-
-.form-control::placeholder {
-    font-size: 15px;
-    color: black;
-}
-
-.custom-action {
-    margin-top: 25px;
-}
-
-.custom-action .btn {
-    font-size: 14px;
-    font-weight: 500;
-    padding: 9px 15px;
-}
-
-.custom-action .btn-danger {
-    margin-left: 10px;
-}
-
-
-
-
-
