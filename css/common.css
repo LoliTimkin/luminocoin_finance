@@ -50,7 +50,7 @@ body {
 
 }
 
-.nav-link img {
+.nav-link img, .nav-link svg {
     vertical-align: baseline;
     margin-right: 1px;
 }
@@ -74,7 +74,7 @@ body {
     align-items: center; /* Выровнять текст и картинку по центру по вертикали */
 }
 
-.custom-nav-link img  {
+.custom-nav-link img, .custom-nav-link svg {
     margin-left: auto; /* Сдвиг изображения вправо */
 }
 

@@ -7,10 +7,9 @@
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/edit_finances.css">
-    <title>Create Finances</title>
+    <title>Edit Expenses</title>
 </head>
 <body>
-
 <div class="container-fluid">
     <div class="row ">
         <div class="col-2 border-end custom-sidebar d-flex flex-column">
@@ -23,7 +22,7 @@
                 <ul class="nav flex-column nav-pills align-items-center">
                     <li class="nav-item">
 
-                        <a class="nav-link" aria-current="page" href="#">
+                        <a class="nav-link " aria-current="page" href="#">
                             <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M1.5 12.3964V5.89641H2.5V12.3964C2.5 12.6726 2.72386 12.8964 3 12.8964H12C12.2761 12.8964 12.5 12.6726 12.5 12.3964V5.89641H13.5V12.3964C13.5 13.2248 12.8284 13.8964 12 13.8964H3C2.17157 13.8964 1.5 13.2248 1.5 12.3964Z" fill="#052C65"/>
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M12.5 1.39641V4.89641L10.5 2.89641V1.39641C10.5 1.12027 10.7239 0.896409 11 0.896409H12C12.2761 0.896409 12.5 1.12027 12.5 1.39641Z" fill="#052C65"/>
@@ -52,21 +51,6 @@
                             <li><a class="dropdown-item" href="#">Расходы</a></li>
                         </ul>
                     </li>
-                    <!--                <li class="nav-item accordion w-100">
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header">
-                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                    Категории
-                                                </button>
-                                            </h2>
-                                            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                                <div class="accordion-body">
-                                                    <a class="nav-link accordion-body" href="#">Доходы</a>
-                                                    <a class="nav-link" href="#">Расходы</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>-->
                 </ul>
             </div>
 
@@ -86,11 +70,11 @@
         </div>
         <div class="col-10 content">
             <div class="custom-page-name">
-                Создание категории доходов
+                Редактирование категории расходов
             </div>
-            <input class="form-control" type="text" placeholder="Названиe..." aria-label="edit_category_name">
+            <input class="form-control" type="text" id="edit_expenses_name" aria-label="edit_expenses_name">
             <div class="custom-action">
-                <button type="button" class="btn btn-success">Создать</button>
+                <button type="button" class="btn btn-success">Сохранить</button>
                 <button type="button" class="btn btn-danger">Отмена</button>
             </div>
         </div>
@@ -102,6 +86,8 @@
         crossorigin="anonymous">
 
 </script>
-
+<script>
+    document.getElementById("edit_expenses_name").value="Жильё";
+</script>
 </body>
 </html>
