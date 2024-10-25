@@ -28,7 +28,7 @@ export class Router {
             {
                 route: '#/login',
                 title: 'Вход',
-                template: 'login.html',
+                page: 'login.html',
                 load: () => {
                     new Form("login");
                 }
@@ -37,8 +37,8 @@ export class Router {
     }
 
     async openRoute() {
-        //const urlRoute = window.location.hash.split('?')[0];
-        const urlRoute = window.location.hash.slice(1) || '/';
+        const urlRoute = window.location.hash.split('?')[0];
+        //const urlRoute = window.location.hash.slice(1) || '/';
         const newRoute = this.routes.find(item => {
             return item.route === urlRoute;
         })
@@ -49,7 +49,7 @@ export class Router {
         }
 
         this.contentElement.innerHTML =
-            await fetch(newRoute.template).then(response => response.text())
+            await fetch(newRoute.page).then(response => response.text())
         this.stylesElement.setAttribute('href', newRoute.styles);
         this.titleElement.innerText = newRoute.title;
 
