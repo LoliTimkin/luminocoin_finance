@@ -1,4 +1,5 @@
 import {Form} from "./component/form.js";
+import {config, config2} from "./component/main.js"
 
 export class Router {
     constructor() {
@@ -11,9 +12,12 @@ export class Router {
                 route: '#/',
                 title: 'Главная',
                 page: 'templates/layout.html',
-                styles: '',
+                styles: 'css/main.css',
                 load: () => {
-
+                    const ctx = document.getElementById('myChart');
+                    const ctx2 = document.getElementById('myChart2');
+                    const myChart = new Chart(ctx, config);
+                    const myChart2 = new Chart(ctx2, config2);
                 }
             },
             {
@@ -29,6 +33,7 @@ export class Router {
                 route: '#/login',
                 title: 'Вход',
                 page: 'templates/login.html',
+                styles: 'css/form.css',
                 load: () => {
                     new Form("login");
                 }
@@ -44,7 +49,7 @@ export class Router {
         })
 
         if(!newRoute) {
-            window.location.href = '#/signup';
+            window.location.href = '#/';
             return;
         }
 
