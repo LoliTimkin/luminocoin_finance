@@ -10,7 +10,7 @@ export class Router {
             {
                 route: '#/',
                 title: 'Главная',
-                page: 'layout.html',
+                page: 'templates/layout.html',
                 styles: '',
                 load: () => {
 
@@ -19,7 +19,7 @@ export class Router {
             {
                 route: '#/signup',
                 title: 'Регистрация',
-                page: 'signup.html',
+                page: 'templates/signup.html',
                 styles: 'css/form.css',
                 load: () => {
                     new Form("signup");
@@ -28,7 +28,7 @@ export class Router {
             {
                 route: '#/login',
                 title: 'Вход',
-                page: 'login.html',
+                page: 'templates/login.html',
                 load: () => {
                     new Form("login");
                 }
