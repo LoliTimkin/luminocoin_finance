@@ -64,6 +64,8 @@ function validateAgreement() {
     }
 }*/
 
+import {CustomHttp} from "../services/custom-http.js";
+
 export class Form {
     constructor(page) {
         this.processElement = null;
@@ -144,6 +146,61 @@ export class Form {
             this.processElement.setAttribute('disabled', 'disabled');
         }
         return validForm;
+    }
+
+    async processForm() {
+        if (this.validateForm()) {
+            const email = this.fields.find(item => item.name === 'email').element.value;
+            const password = this.fields.find(item => item.name === 'password').element.value;
+
+            if(this.page === 'signup') {
+                try {
+
+                    const result = await CustomHttp.request('http://localhost:3000/api/signup', 'POST', {
+                        name: this.fields.find(item => item.name === 'name').element.value,
+                        lastName: "default",
+                        //lastName: this.fields.find(item => item.name === 'lastName').element.value,
+                        email: email,
+                        password: password,
+                        passwordRepeat: password
+                    })
+
+                    if(result) {
+                        if(result.error || !result.user) {
+                            throw new Error(result.message);
+                        }
+                    }
+                }  catch (error) {
+                    return console.log(error)
+                }
+
+            }
+
+            try {
+                const result = await CustomHttp.request('http://localhost:3000/api/login', 'POST', {
+                    //name: this.fields.find(item => item.name === 'name').element.value,
+                    //lastName: this.fields.find(item => item.name === 'lastName').element.value,
+                    email: email,
+                    password: password,
+                })
+
+                if(result) {
+                    if(result.error || !result.accessToken || !result.refreshToken
+                        || !result.fullName || !result.userId ) {
+                        throw new Error(result.message);
+                    }
+                    Auth.setTokens(result.accessToken, result.refreshToken);
+                    Auth.setUserInfo({
+                        fullName: result.fullName,
+                        userId: result.userId,
+                        email: email
+                    })
+                    location.href = '#/choice'
+                }
+            }  catch (error) {
+                console.log(error)
+            }
+        }
     }
 }
 

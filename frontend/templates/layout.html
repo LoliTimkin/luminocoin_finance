@@ -1,0 +1,102 @@
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2 border-end custom-sidebar d-flex flex-column">
+            <div class="row ">
+                <div class="text-center logo border-bottom">
+                    <img src="../images/Logo.png" class="rounded" alt="Логотип компании">
+                </div>
+            </div>
+            <div class="row custom-sidebar-panel">
+                <ul class="nav flex-column nav-pills align-items-center">
+                    <li class="nav-item">
+
+                        <a class="nav-link active" aria-current="page" href="#">
+                            <img src="../images/Icon-home.png" alt="Домик">
+                            Главная
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <img src="../images/Icon-cash.png" alt="значок денег">
+                            Доходы & Расходы
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle custom-nav-link" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            Категории
+                            <img src="../images/Arrow.png" alt="" class="custom-dropdown-toggle">
+                        </a>
+
+                        <ul class="dropdown-menu w-100">
+                            <li><a class="dropdown-item" href="#">Доходы</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Расходы</a></li>
+                        </ul>
+                    </li>
+                    <!--                <li class="nav-item accordion w-100">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                    Категории
+                                                </button>
+                                            </h2>
+                                            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+                                                    <a class="nav-link accordion-body" href="#">Доходы</a>
+                                                    <a class="nav-link" href="#">Расходы</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>-->
+                </ul>
+            </div>
+
+            <div class="row custom-sidebar-panel align-items-end">
+                <div class="col ">
+                    <div class="custom-balance">Баланc: <span>500$</span></div>
+                </div>
+            </div>
+
+            <div class="row ">
+                <div class="custom-user mt-auto border-top text-center">
+                    <img src="../images/Icon.png" alt="иконка пользователя">
+                    <span>RomanChernov</span>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-10 content">
+                <div class="custom-page-name">
+                    Главная
+                </div>
+                <div class="custom-filters">
+                    <button type="button" class="btn btn-secondary btn-sm">Сегодня</button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm">Неделя</button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm">Месяц</button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm">Год</button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm">Все</button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm">Интервал</button>
+                    <span>c</span>
+                    <button type="button" class="btn custom-text-color">Дата</button>
+                    <span>по</span>
+                    <button type="button" class="btn custom-text-color">Дата</button>
+                </div>
+            <div class="row">
+                <div class="col-5 border-end">
+                    <div>
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div>
+                        <canvas id="myChart2"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

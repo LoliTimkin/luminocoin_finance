@@ -1,5 +1,6 @@
 import {Form} from "./component/form.js";
-import {config, config2} from "./component/main.js"
+import {config, config2} from "./component/main.js";
+import {Auth} from "./services/auth.js";
 
 export class Router {
     constructor() {
@@ -44,6 +45,19 @@ export class Router {
     async openRoute() {
         const urlRoute = window.location.hash.split('?')[0];
         //const urlRoute = window.location.hash.slice(1) || '/';
+        const userInfo = Auth.getUserInfo();
+
+        if (urlRoute === '#/logout') {
+            await Auth.logout();
+            window.location.href = '#/login';
+            return;
+        }
+
+        if (!userInfo && urlRoute !== '#/signup' && urlRoute !== '#/login') {
+            window.location.href = '#/login';
+            return;
+        }
+
         const newRoute = this.routes.find(item => {
             return item.route === urlRoute;
         })
