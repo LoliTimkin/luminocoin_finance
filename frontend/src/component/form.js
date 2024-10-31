@@ -65,6 +65,7 @@ function validateAgreement() {
 }*/
 
 import {CustomHttp} from "../services/custom-http.js";
+import {Auth} from "../services/auth.js";
 
 export class Form {
     constructor(page) {
@@ -159,14 +160,13 @@ export class Form {
                     const result = await CustomHttp.request('http://localhost:3000/api/signup', 'POST', {
                         name: this.fields.find(item => item.name === 'name').element.value,
                         lastName: "default",
-                        //lastName: this.fields.find(item => item.name === 'lastName').element.value,
                         email: email,
                         password: password,
                         passwordRepeat: password
                     })
 
                     if(result) {
-                        if(result.error || !result.user) {
+                        if(result.error || !result.user.id) {
                             throw new Error(result.message);
                         }
                     }
@@ -178,24 +178,22 @@ export class Form {
 
             try {
                 const result = await CustomHttp.request('http://localhost:3000/api/login', 'POST', {
-                    //name: this.fields.find(item => item.name === 'name').element.value,
-                    //lastName: this.fields.find(item => item.name === 'lastName').element.value,
                     email: email,
                     password: password,
                 })
 
                 if(result) {
-                    if(result.error || !result.accessToken || !result.refreshToken
-                        || !result.fullName || !result.userId ) {
+                    if(result.error || !result.tokens.accessToken || !result.tokens.refreshToken
+                        || !result.user.id || !result.user.name) {
                         throw new Error(result.message);
                     }
-                    Auth.setTokens(result.accessToken, result.refreshToken);
+                    Auth.setTokens(result.tokens.accessToken, result.tokens.refreshToken);
                     Auth.setUserInfo({
-                        fullName: result.fullName,
-                        userId: result.userId,
-                        email: email
+                        userId: result.user.id,
+                        email: email,
+                        name: result.user.name
                     })
-                    location.href = '#/choice'
+                    location.href = '#/'
                 }
             }  catch (error) {
                 console.log(error)

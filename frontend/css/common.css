@@ -95,8 +95,36 @@ body {
 
 .custom-user {
     padding: 20px 20px 40px;
+    cursor: pointer;
+    position: relative;
 }
 
 .custom-user img {
     margin-right: 16px;
 }
+
+.logout {
+    display: none;
+    border: grey;
+    position: absolute;
+    background-color: #d9d9d9;
+    top: 0;
+    left: 100%;
+    padding: 20px 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.logout a {
+ text-decoration: none;
+ color: #052c65;
+}
+
+.custom-user:hover .logout {
+    display: block;
+}
+
+.logout:hover {
+    background-color: #e8e7e7;
+}
+
