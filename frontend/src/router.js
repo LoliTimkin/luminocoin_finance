@@ -39,6 +39,78 @@ export class Router {
                     new Form("login");
                 }
             },
+            {
+                route: '#/finances',
+                title: 'Доходы',
+                page: 'templates/finances.html',
+                styles: 'css/finances.css',
+                load: () => {
+
+                }
+            },
+            {
+                route: '#/edit_finances',
+                title: 'Редактирование доходов',
+                page: 'templates/edit_finances.html',
+                styles: 'css/edit_finances.css',
+                load: () => {
+                    document.getElementById("edit_category_name").value="Зарплата";
+                }
+            },
+            {
+                route: '#/create_finances',
+                title: 'Создание дохода',
+                page: 'templates/create_finances.html',
+                styles: 'css/edit_finances.css',
+                load: () => {
+
+                }
+            },
+            {
+                route: '#/create_expenses',
+                title: 'Создание расхода',
+                page: 'templates/create_expenses.html',
+                styles: 'css/edit_finances.css',
+                load: () => {
+
+                }
+            },
+            {
+                route: '#/edit_expenses',
+                title: 'Редактирование расхода',
+                page: 'templates/edit_expenses.html',
+                styles: 'css/edit_finances.css',
+                load: () => {
+                    document.getElementById("edit_expenses_name").value="Жильё";
+                }
+            },
+            {
+                route: '#/finances_and_expenses',
+                title: 'Редактирование расхода',
+                page: 'templates/finances_and_expenses.html',
+                styles: 'css/finances_expenses.css',
+                load: () => {
+
+                }
+            },
+            {
+                route: '#/operations_create',
+                title: 'Создать операцию',
+                page: 'templates/operations_create.html',
+                styles: 'css/edit_finances.css',
+                load: () => {
+
+                }
+            },
+            {
+                route: '#/operations_edit',
+                title: 'Редактировать операцию',
+                page: 'templates/operations_edit.html',
+                styles: 'css/edit_finances.css',
+                load: () => {
+
+                }
+            },
         ]
     }
 
