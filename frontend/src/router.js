@@ -1,6 +1,8 @@
 import {Form} from "./component/form.js";
 import {config, config2} from "./component/main.js";
 import {Auth} from "./services/auth.js";
+import {Sidebar} from "./component/sidebar.js";
+import {EditFinances} from "./component/edit_finances";
 
 export class Router {
     constructor() {
@@ -15,6 +17,7 @@ export class Router {
                 page: 'templates/layout.html',
                 styles: 'css/main.css',
                 load: () => {
+                    new Sidebar();
                     const ctx = document.getElementById('myChart');
                     const ctx2 = document.getElementById('myChart2');
                     const myChart = new Chart(ctx, config);
@@ -45,7 +48,7 @@ export class Router {
                 page: 'templates/finances.html',
                 styles: 'css/finances.css',
                 load: () => {
-
+                    new EditFinances()
                 }
             },
             {
@@ -86,7 +89,7 @@ export class Router {
             },
             {
                 route: '#/finances_and_expenses',
-                title: 'Редактирование расхода',
+                title: 'Доходы и расходы',
                 page: 'templates/finances_and_expenses.html',
                 styles: 'css/finances_expenses.css',
                 load: () => {
