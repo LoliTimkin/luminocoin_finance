@@ -48,7 +48,7 @@ export class EditFinances {
         <div class="card-body">
           <h3 class="card-title">${item.title}</h3>
           <div class="d-flex justify-content-start">
-            <a href="#/edit_finances?id=${item.id}" class="btn btn-primary btn-edit">Редактировать</a>
+            <a href="#" class="btn btn-primary btn-edit">Редактировать</a>
             <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
               Удалить
             </a>
