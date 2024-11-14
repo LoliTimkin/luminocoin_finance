@@ -2,7 +2,7 @@ import {Form} from "./component/form.js";
 import {config, config2} from "./component/main.js";
 import {Auth} from "./services/auth.js";
 import {Sidebar} from "./component/sidebar.js";
-import {EditFinances} from "./component/edit_finances";
+import {EditFinances} from "./component/edit_finances.js";
 
 export class Router {
     constructor() {
@@ -48,7 +48,8 @@ export class Router {
                 page: 'templates/finances.html',
                 styles: 'css/finances.css',
                 load: () => {
-                    new EditFinances()
+
+                    new EditFinances("finances");
                 }
             },
             {
@@ -67,6 +68,16 @@ export class Router {
                 styles: 'css/edit_finances.css',
                 load: () => {
 
+                }
+            },
+            {
+                route: '#/expenses',
+                title: 'Расходы',
+                page: 'templates/expenses.html',
+                styles: 'css/finances.css',
+                load: () => {
+
+                    new EditFinances("expenses");
                 }
             },
             {
@@ -93,7 +104,7 @@ export class Router {
                 page: 'templates/finances_and_expenses.html',
                 styles: 'css/finances_expenses.css',
                 load: () => {
-
+                    new Sidebar();
                 }
             },
             {

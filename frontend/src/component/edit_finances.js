@@ -2,16 +2,30 @@
 export class EditFinances {
     // Находим все кнопки с классом 'edit-btn'
 
-    constructor() {
+    constructor(page) {
          this.editButtons = document.querySelectorAll('.btn-edit');
-         this.createButton = document.getElementById('create_finance')
+         this.createButton = document.getElementById('create_item')
          this.editButtonHandler()
+         this.page = page
          this.data = [
             { "id": 10, "title": "Депозиты" },
             { "id": 11, "title": "Зарплата" },
-            { "id": 11, "title": "Сбережения" },
-            { "id": 11, "title": "Инвестиции" }
+            { "id": 12, "title": "Сбережения" },
+            { "id": 13, "title": "Инвестиции" }
         ];
+        if (page === "expenses") {
+            this.data = [
+                { "id": 14, "title": "Еда" },
+                { "id": 15, "title": "Жилье" },
+                { "id": 16, "title": "Здоровье" },
+                { "id": 17, "title": "Кафе" },
+                { "id": 18, "title": "Авто" },
+                { "id": 19, "title": "Одежда" },
+                { "id": 20, "title": "Развлечения" },
+                { "id": 21, "title": "Счета" },
+                { "id": 22, "title": "Спорт" }
+            ];
+        }
          this.cardsGenerator()
     }
 
@@ -19,13 +33,20 @@ export class EditFinances {
         this.editButtons.forEach(button => {
             button.addEventListener('click', function(event) {
                 event.preventDefault(); // Предотвращаем стандартное действие ссылки
-                // Перенаправляем на страницу редактирования
-                window.location.href = '#/edit_finances';
+                if (this.page === "expenses")  {
+                    window.location.href = '#/edit_expenses';
+                } else {
+                    window.location.href = '#/edit_finances';
+                }
             });
         });
 
         this.createButton.addEventListener('click', function (event){
-            window.location.href = '#/create_finances';
+            if (this.page === "expenses")  {
+                window.location.href = '#/create_expenses';
+            } else {
+                window.location.href = '#/create_finances';
+            }
         })
     }
 

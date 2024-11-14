@@ -4,6 +4,18 @@ export class Sidebar {
     constructor() {
         this.balance = document.getElementById('balance-value');
         this.getBalance();
+        this.buttons = document.querySelectorAll('.nav-link')
+        //const that = this.buttons
+        this.buttonCategory = document.getElementById('category');
+
+        this.buttonCategory.addEventListener('click', () => {
+            this.buttons.forEach(button => button.classList.remove('active'));
+            this.buttonCategory.classList.add('active');
+            document.querySelectorAll('.nav-link svg path').forEach((path) => {
+                path.setAttribute('fill', '#052C65');
+            });
+            document.querySelector('.custom-dropdown-toggle path').setAttribute('fill', 'white');
+        })
     }
 
     async getBalance() {
