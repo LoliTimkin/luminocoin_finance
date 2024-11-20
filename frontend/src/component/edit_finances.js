@@ -1,11 +1,17 @@
+import {CustomHttp} from "../services/custom-http.js";
+import config from "../../config/config.js";
 
 export class EditFinances {
     // Находим все кнопки с классом 'edit-btn'
 
     constructor(page) {
-         this.editButtons = document.querySelectorAll('.btn-edit');
          this.createButton = document.getElementById('create_item')
-         this.editButtonHandler()
+         const that = this
+         this.removeModalButton = document.getElementById('modal-remove-category')
+         this.removeModalButton.addEventListener('click', function() {
+             that.deleteCategory()
+         })
+
          this.page = page
          this.data = [
             { "id": 10, "title": "Депозиты" },
@@ -13,6 +19,8 @@ export class EditFinances {
             { "id": 12, "title": "Сбережения" },
             { "id": 13, "title": "Инвестиции" }
         ];
+        const responce = CustomHttp.request(config.host + '/categories/income');
+        console.log(responce)
         if (page === "expenses") {
             this.data = [
                 { "id": 14, "title": "Еда" },
@@ -27,16 +35,35 @@ export class EditFinances {
             ];
         }
          this.cardsGenerator()
+         this.editButtons = document.querySelectorAll('.btn-edit');
+         this.removeButtons = document.querySelectorAll('.btn-remove')
+         this.editButtonHandler()
     }
 
     editButtonHandler() {
         this.editButtons.forEach(button => {
-            button.addEventListener('click', function(event) {
+            button.addEventListener('click', (event) => {
                 event.preventDefault(); // Предотвращаем стандартное действие ссылки
+                const categoryCard = button.closest('.card');
+                const categoryName = categoryCard.querySelector('.card-title').textContent;
                 if (this.page === "expenses")  {
                     window.location.href = '#/edit_expenses';
                 } else {
-                    window.location.href = '#/edit_finances';
+                    window.location.href = `#/edit_finances?category=${categoryName}`;
+                }
+            });
+        });
+
+        this.removeButtons.forEach(button => {
+            button.addEventListener('click', (event) => {
+                event.preventDefault(); // Предотвращаем стандартное действие ссылки
+                const categoryCard = button.closest('.card');
+                const categoryName = categoryCard.querySelector('.card-title').textContent;
+                const categoryId = categoryCard.querySelector('.btn-remove').id;
+                if (this.page === "expenses")  {
+                    window.location.href = '#/edit_expenses';
+                } else {
+                    window.location.href = `#/finances?category=${categoryName}&id=${categoryId}`;
                 }
             });
         });
@@ -67,10 +94,10 @@ export class EditFinances {
         card.innerHTML = `
       <div class="card">
         <div class="card-body">
-          <h3 class="card-title">${item.title}</h3>
+          <h3 class="card-title" id="category-name">${item.title}</h3>
           <div class="d-flex justify-content-start">
             <a href="#/edit_finances?id=${item.id}" class="btn btn-primary btn-edit">Редактировать</a>
-            <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <a id="${item.id}" class="btn btn-danger btn-remove" data-bs-toggle="modal" data-bs-target="#exampleModal">
               Удалить
             </a>
           </div>
@@ -78,6 +105,25 @@ export class EditFinances {
       </div>
     `;
         return card;
+    }
+
+    async deleteCategory() {
+        const hash = window.location.hash;
+        const queryString = hash.split('?')[1];
+        const params = new URLSearchParams(queryString);
+        const categoryId = params.get('id');
+        //document.getElementById('category-name-input').value = categoryName || '';
+        try {
+            const result = await CustomHttp.request(`http://localhost:3000/api/categories/income/${categoryId}`,
+                'DELETE')
+            if (result) {
+                if (result.error) {
+                    throw new Error(result.message);
+                }
+            }
+        } catch (error) {
+            return console.log(error)
+        }
     }
 
 

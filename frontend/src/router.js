@@ -3,6 +3,8 @@ import {config, config2} from "./component/main.js";
 import {Auth} from "./services/auth.js";
 import {Sidebar} from "./component/sidebar.js";
 import {EditFinances} from "./component/edit_finances.js";
+import {CreateCategory} from "./component/create_category";
+import {UpdateCategory} from "./component/update_category";
 
 export class Router {
     constructor() {
@@ -58,7 +60,8 @@ export class Router {
                 page: 'templates/edit_finances.html',
                 styles: 'css/edit_finances.css',
                 load: () => {
-                    document.getElementById("edit_category_name").value="Зарплата";
+                    new UpdateCategory("finances")
+                    //document.getElementById("edit_category_name").value="Зарплата";
                 }
             },
             {
@@ -67,7 +70,7 @@ export class Router {
                 page: 'templates/create_finances.html',
                 styles: 'css/edit_finances.css',
                 load: () => {
-
+                    new CreateCategory("finances")
                 }
             },
             {
