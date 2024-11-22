@@ -14,13 +14,13 @@ export class EditFinances {
 
          this.page = page
          this.data = [
-            { "id": 10, "title": "Депозиты" },
-            { "id": 11, "title": "Зарплата" },
-            { "id": 12, "title": "Сбережения" },
-            { "id": 13, "title": "Инвестиции" }
+            { "id": 1, "title": "Депозиты" },
+            { "id": 2, "title": "Зарплата" },
+            { "id": 3, "title": "Сбережения" },
+            { "id": 4, "title": "Инвестиции" }
         ];
-        const responce = CustomHttp.request(config.host + '/categories/income');
-        console.log(responce)
+        //const response = CustomHttp.request(config.host + '/categories/income');
+        //console.log(response)
         if (page === "expenses") {
             this.data = [
                 { "id": 14, "title": "Еда" },
@@ -77,7 +77,21 @@ export class EditFinances {
         })
     }
 
-    cardsGenerator() {
+    async cardsGenerator() {
+        // Получаем данные с сервера и добавляем в исходный набор данных
+/*        try {
+            const result = await CustomHttp.request(config.host + '/categories/income',
+                'GET')
+            if (result) {
+                if (result.error) {
+                    throw new Error(result.message);
+                }
+
+                this.data = this.data.concat(result)
+            }
+        } catch (error) {
+            return console.log(error)
+        }*/
 
         // Получаем контейнер для карточек
         const cardsContainer = document.getElementById('cards-container');
