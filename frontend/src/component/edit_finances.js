@@ -35,9 +35,6 @@ export class EditFinances {
             ];
         }
          this.cardsGenerator()
-         this.editButtons = document.querySelectorAll('.btn-edit');
-         this.removeButtons = document.querySelectorAll('.btn-remove')
-         this.editButtonHandler()
     }
 
     editButtonHandler() {
@@ -79,7 +76,7 @@ export class EditFinances {
 
     async cardsGenerator() {
         // Получаем данные с сервера и добавляем в исходный набор данных
-/*        try {
+        try {
             const result = await CustomHttp.request(config.host + '/categories/income',
                 'GET')
             if (result) {
@@ -91,7 +88,7 @@ export class EditFinances {
             }
         } catch (error) {
             return console.log(error)
-        }*/
+            }
 
         // Получаем контейнер для карточек
         const cardsContainer = document.getElementById('cards-container');
@@ -100,6 +97,13 @@ export class EditFinances {
             const card = this.createCard(item);
             cardsContainer.prepend(card);
         });
+
+        //  только после рендеринга карточек вешаем обработчики, так как данные с сервера по ним
+        // асинхронный код
+        this.editButtons = document.querySelectorAll('.btn-edit');
+        this.removeButtons = document.querySelectorAll('.btn-remove')
+
+        this.editButtonHandler()
     }
 
     createCard(item) {
