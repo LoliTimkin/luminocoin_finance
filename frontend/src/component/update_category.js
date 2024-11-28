@@ -3,6 +3,9 @@ import config from "../../config/config.js";
 
 export class UpdateCategory {
     constructor(page) {
+        this.typeOfCategory = ''
+        this.page = page
+
         this.editButton = document.getElementById('edit-category');
         this.declineButton = document.getElementById('decline-button');
         this.inputButton = document.getElementById("edit-category-name");
@@ -18,21 +21,42 @@ export class UpdateCategory {
             if(page==="finances") {
                 this.editCategory()
                 window.location.href = "#/finances"
+            } else if(page === "expenses") {
+                this.editCategory()
+                window.location.href = "#/expenses"
+            } else {
+                window.location.href = "#/"
             }
         })
 
         this.declineButton.addEventListener('click', function() {
-            if(page==="finances")
+            if(page==="finances") {
                 window.location.href = "#/finances"
+            } else if(page === "expenses") {
+                window.location.href = "#/expenses"
+            } else {
+                window.location.href = "#/"
+            }
         })
     }
 
     async editCategory() {
         const categoryName = this.inputButton.value;
-        const categoryId = 5;
+        //const categoryId = 5;
+
+        const hash = window.location.hash;
+        const queryString = hash.split('?')[1];
+        const params = new URLSearchParams(queryString);
+        const categoryId = params.get('id');
+
+        if (this.page === "expenses") {
+            this.typeOfCategory = "expense"
+        } else {
+            this.typeOfCategory = "income"
+        }
 
         try {
-            const result = await CustomHttp.request(config.host + `/categories/income/${categoryId}`,
+            const result = await CustomHttp.request(config.host + `/categories/${this.typeOfCategory}/${categoryId}`,
                 'PUT',
                 {
                     title: categoryName

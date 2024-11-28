@@ -5,6 +5,7 @@ export class EditFinances {
     // Находим все кнопки с классом 'edit-btn'
 
     constructor(page) {
+         //this.typeOfCategory = ""
          this.createButton = document.getElementById('create_item')
          const that = this
          this.removeModalButton = document.getElementById('modal-remove-category')
@@ -13,6 +14,12 @@ export class EditFinances {
          })
 
          this.page = page
+
+        if (this.page === "expenses") {
+            this.typeOfCategory = "expense"
+        } else {
+            this.typeOfCategory = "income"
+        }
          this.data = [
             { "id": 1, "title": "Депозиты" },
             { "id": 2, "title": "Зарплата" },
@@ -23,15 +30,15 @@ export class EditFinances {
         //console.log(response)
         if (page === "expenses") {
             this.data = [
-                { "id": 14, "title": "Еда" },
-                { "id": 15, "title": "Жилье" },
-                { "id": 16, "title": "Здоровье" },
-                { "id": 17, "title": "Кафе" },
-                { "id": 18, "title": "Авто" },
-                { "id": 19, "title": "Одежда" },
-                { "id": 20, "title": "Развлечения" },
-                { "id": 21, "title": "Счета" },
-                { "id": 22, "title": "Спорт" }
+                { "id": 1, "title": "Еда" },
+                { "id": 2, "title": "Жилье" },
+                { "id": 3, "title": "Здоровье" },
+                { "id": 4, "title": "Кафе" },
+                { "id": 5, "title": "Авто" },
+                { "id": 6, "title": "Одежда" },
+                { "id": 7, "title": "Развлечения" },
+                { "id": 8, "title": "Счета" },
+                { "id": 9, "title": "Спорт" }
             ];
         }
          this.cardsGenerator()
@@ -43,10 +50,12 @@ export class EditFinances {
                 event.preventDefault(); // Предотвращаем стандартное действие ссылки
                 const categoryCard = button.closest('.card');
                 const categoryName = categoryCard.querySelector('.card-title').textContent;
+                const categoryId = categoryCard.querySelector('.btn-edit').id;
+
                 if (this.page === "expenses")  {
-                    window.location.href = '#/edit_expenses';
+                    window.location.href = `#/edit_expenses?category=${categoryName}&id=${categoryId}`;
                 } else {
-                    window.location.href = `#/edit_finances?category=${categoryName}`;
+                    window.location.href = `#/edit_finances?category=${categoryName}&id=${categoryId}`;
                 }
             });
         });
@@ -58,14 +67,14 @@ export class EditFinances {
                 const categoryName = categoryCard.querySelector('.card-title').textContent;
                 const categoryId = categoryCard.querySelector('.btn-remove').id;
                 if (this.page === "expenses")  {
-                    window.location.href = '#/edit_expenses';
+                    window.location.href = `#/expenses?category=${categoryName}&id=${categoryId}`;
                 } else {
                     window.location.href = `#/finances?category=${categoryName}&id=${categoryId}`;
                 }
             });
         });
 
-        this.createButton.addEventListener('click', function (event){
+        this.createButton.addEventListener('click',  (event) => {
             if (this.page === "expenses")  {
                 window.location.href = '#/create_expenses';
             } else {
@@ -75,9 +84,10 @@ export class EditFinances {
     }
 
     async cardsGenerator() {
+
         // Получаем данные с сервера и добавляем в исходный набор данных
         try {
-            const result = await CustomHttp.request(config.host + '/categories/income',
+            const result = await CustomHttp.request(config.host + `/categories/${this.typeOfCategory}`,
                 'GET')
             if (result) {
                 if (result.error) {
@@ -114,7 +124,7 @@ export class EditFinances {
         <div class="card-body">
           <h3 class="card-title" id="category-name">${item.title}</h3>
           <div class="d-flex justify-content-start">
-            <a href="#/edit_finances?id=${item.id}" class="btn btn-primary btn-edit">Редактировать</a>
+            <a href="#/edit_finances?id=${item.id}" id="${item.id}" class="btn btn-primary btn-edit">Редактировать</a>
             <a id="${item.id}" class="btn btn-danger btn-remove" data-bs-toggle="modal" data-bs-target="#exampleModal">
               Удалить
             </a>
@@ -131,8 +141,9 @@ export class EditFinances {
         const params = new URLSearchParams(queryString);
         const categoryId = params.get('id');
         //document.getElementById('category-name-input').value = categoryName || '';
+
         try {
-            const result = await CustomHttp.request(`http://localhost:3000/api/categories/income/${categoryId}`,
+            const result = await CustomHttp.request(`http://localhost:3000/api/categories/${this.typeOfCategory}/${categoryId}`,
                 'DELETE')
             if (result) {
                 if (result.error) {

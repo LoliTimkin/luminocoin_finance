@@ -79,7 +79,6 @@ export class Router {
                 page: 'templates/expenses.html',
                 styles: 'css/finances.css',
                 load: () => {
-
                     new EditFinances("expenses");
                 }
             },
@@ -89,7 +88,7 @@ export class Router {
                 page: 'templates/create_expenses.html',
                 styles: 'css/edit_finances.css',
                 load: () => {
-
+                    new CreateCategory("expenses")
                 }
             },
             {
@@ -98,7 +97,8 @@ export class Router {
                 page: 'templates/edit_expenses.html',
                 styles: 'css/edit_finances.css',
                 load: () => {
-                    document.getElementById("edit_expenses_name").value="Жильё";
+                    new UpdateCategory("expenses")
+                    //document.getElementById("edit_expenses_name").value="Жильё";
                 }
             },
             {
