@@ -64,16 +64,26 @@
                 Создание дохода/расхода
             </div>
             <div class="custom-input-group">
-                <input class="form-control" type="text" placeholder="Тип..." aria-label="type">
-                <input class="form-control" type="text" placeholder="Категория..." aria-label="category">
-                <input class="form-control" type="text" placeholder="Сумма в $..." aria-label="sum">
-                <input class="form-control" type="text" placeholder="Дата..." aria-label="date">
-                <input class="form-control" type="text" placeholder="Комментарий..." aria-label="comment">
+<!--                <input class="form-control custom-input" type="text" placeholder="Тип..." aria-label="type">-->
+                <select class="form-select custom-input" id="input-category-type" aria-label="Пример выбора по умолчанию">
+                    <option selected>Выберите тип</option>
+                    <option value="income">Доход</option>
+                    <option value="expense">Расход</option>
+                </select>
+<!--                <input class="form-control custom-input" type="text" placeholder="Категория..." aria-label="category">-->
+                <select class="form-select custom-input" id="input-category-name" aria-label="Пример выбора по умолчанию">
+                    <option selected>Выберите категорию</option>
+                    <option value="">Инвестиции</option>
+                    <option value="">Сбережения</option>
+                </select>
+                <input class="form-control custom-input" id="input-sum-operation" type="text" placeholder="Сумма в $..." aria-label="sum">
+                <input class="form-control custom-input" id="input-date-operation" type="text" placeholder="Дата..." aria-label="date">
+                <input class="form-control custom-input" id="input-comment-operation" type="text" placeholder="Комментарий..." aria-label="comment">
             </div>
 
             <div class="custom-action">
-                <button type="button" class="btn btn-success">Создать</button>
-                <button type="button" class="btn btn-danger">Отмена</button>
+                <button type="button" class="btn btn-success" id="create-operation">Создать</button>
+                <button type="button" class="btn btn-danger" id="decline-button">Отмена</button>
             </div>
         </div>
     </div>

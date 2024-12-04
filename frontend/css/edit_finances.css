@@ -35,7 +35,11 @@
     margin-left: 10px;
 }
 
-.custom-input-group input:not(:last-child) {
+.custom-input-group {
+    max-width: 397px;
+}
+
+.custom-input-group .custom-input:not(:last-child) {
     margin-bottom: 10px;
 }
 

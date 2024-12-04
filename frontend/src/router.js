@@ -5,6 +5,8 @@ import {Sidebar} from "./component/sidebar.js";
 import {EditFinances} from "./component/edit_finances.js";
 import {CreateCategory} from "./component/create_category";
 import {UpdateCategory} from "./component/update_category";
+import {Operations} from "./component/operations";
+import {CreateOperation} from "./component/create_operation";
 
 export class Router {
     constructor() {
@@ -108,6 +110,7 @@ export class Router {
                 styles: 'css/finances_expenses.css',
                 load: () => {
                     new Sidebar();
+                    new Operations("finances")
                 }
             },
             {
@@ -116,7 +119,7 @@ export class Router {
                 page: 'templates/operations_create.html',
                 styles: 'css/edit_finances.css',
                 load: () => {
-
+                    new CreateOperation()
                 }
             },
             {
