@@ -3,10 +3,10 @@ import {config, config2} from "./component/main.js";
 import {Auth} from "./services/auth.js";
 import {Sidebar} from "./component/sidebar.js";
 import {EditFinances} from "./component/edit_finances.js";
-import {CreateCategory} from "./component/create_category";
-import {UpdateCategory} from "./component/update_category";
-import {Operations} from "./component/operations";
-import {CreateOperation} from "./component/create_operation";
+import {CreateCategory} from "./component/create_category.js";
+import {UpdateCategory} from "./component/update_category.js";
+import {Operations} from "./component/operations.js";
+import {CreateOperation} from "./component/create_operation.js";
 
 export class Router {
     constructor() {
@@ -110,7 +110,7 @@ export class Router {
                 styles: 'css/finances_expenses.css',
                 load: () => {
                     new Sidebar();
-                    new Operations("finances")
+                    new Operations()
                 }
             },
             {
