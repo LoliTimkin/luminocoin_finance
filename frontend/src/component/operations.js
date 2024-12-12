@@ -6,6 +6,42 @@ export class Operations {
         this.createButtonIncome = document.getElementById('create-button-income')
         this.createButtonExpenses = document.getElementById('create-button-expense')
         this.removeModalButton = document.getElementById('modal-remove-operation')
+        // this.choiceWeekFilter = document.getElementById('filter-week')
+        // this.choiceMonthFilter = document.getElementById('filter-month')
+        // this.choiceYearFilter = document.getElementById('filter-year')
+        // this.choiceAllFilter = document.getElementById('filter-all')
+
+        //document.addEventListener("DOMContentLoaded", () => {
+            const buttons = document.querySelectorAll(".filter-button"); // Все кнопки
+            let activeButton = document.querySelector(".filter-button.btn-secondary"); // Кнопка по умолчанию
+
+            // Функция для выполнения фильтрации
+            const applyFilter = (filterValue) => {
+                console.log(`Применение фильтра: ${filterValue}`);
+                // Логика загрузки данных для фильтра
+            };
+
+            // Установить фильтр для активной кнопки по умолчанию
+            if (activeButton) {
+                this.getOperationsByFilter(activeButton.dataset.filter);
+            }
+
+            // Назначить обработчик для всех кнопок
+            buttons.forEach((button) => {
+                button.addEventListener("click", () => {
+                    if (button !== activeButton) {
+                        if (activeButton) {
+                            activeButton.classList.remove("btn-secondary"); // Удаление класса у предыдущей кнопки
+                            activeButton.classList.add("btn-outline-secondary")
+                        }
+                        button.classList.add("btn-secondary"); // Установка класса для текущей кнопки
+                        button.classList.remove("btn-outline-secondary") //  Удаление неактивного состояния
+                        activeButton = button; // Обновление активной кнопки
+                        this.getOperationsByFilter(button.dataset.filter); // Применение фильтра
+                    }
+                });
+            });
+        //});
 
         this.createButtonIncome.addEventListener('click', () => {
                 window.location.href = `#/operations_create`;
@@ -17,13 +53,14 @@ export class Operations {
             this.deleteOperation()
         })
 
+
         this.data = []
-        this.getOperationsByFilter()
+        //this.getOperationsByFilter("day")
     }
 
-    async getOperationsByFilter(){
+    async getOperationsByFilter(period){
         try {
-            const result = await CustomHttp.request(config.host + `/operations?period=day`,
+            const result = await CustomHttp.request(config.host + `/operations?period=${period}`,
                 'GET',
             )
             if (result) {
@@ -91,7 +128,7 @@ export class Operations {
 
      renderingPage() {
         const operationsTable = document.getElementById('table-body');
-        //operationsTable.innerHTML = ''
+        operationsTable.innerHTML = ''
         // Проходим по каждому элементу данных и добавляем строчку в таблицу
         this.data.forEach(item => {
             this.getOperationById(item.id).then(categoryName => {
