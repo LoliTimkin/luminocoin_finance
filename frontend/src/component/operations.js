@@ -147,11 +147,39 @@ export class Operations {
         operationsTable.addEventListener('click', (event) => {
             const icon = event.target.closest('.svg-remove-operation')
             if(icon) {
-                window.location.href = `#/finances_and_expenses?id=5`;
+                const row = icon.closest('tr');
+                if(row) {
+                    const th = row.querySelector('th')
+                    if(th) {
+                        const operationId = th.textContent
+                        if (operationId) window.location.href = `#/finances_and_expenses?id=${operationId}`;
+                    }
+                }
+
             }
         })
         //})
     }
 
+    async deleteOperation() {
+        const hash = window.location.hash
+        const queryString = hash.split("?")[1]
+        const params = new URLSearchParams(queryString)
+        const operationId = params.get("id")
+
+        try {
+            const result = await CustomHttp.request(config.host + `/operations/${operationId}`,
+                'DELETE',
+            )
+            if (result) {
+                if (result.error) {
+                    throw new Error(result.message);
+                }
+
+            }
+        } catch (error) {
+            return console.log(error)
+        }
+    }
 
 }
