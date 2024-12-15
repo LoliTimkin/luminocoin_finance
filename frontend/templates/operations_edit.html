@@ -64,16 +64,16 @@
                 Редактирование дохода/расхода
             </div>
             <div class="custom-input-group">
-                <input class="form-control" type="text" value="Доход" aria-label="type">
-                <input class="form-control" type="text" value="Зарплата" aria-label="category">
-                <input class="form-control" type="text" value="500$" aria-label="sum">
-                <input class="form-control" type="text" value="11.09.2022" aria-label="date">
-                <input class="form-control" placeholder="Комментарий..." aria-label="comment">
+                <input class="form-control" type="text" id="type" value="Доход" aria-label="type">
+                <input class="form-control" type="text" id="categoryName" value="" aria-label="category">
+                <input class="form-control" type="text" id="amount" value="" aria-label="sum">
+                <input class="form-control" type="text" id="date" value="11.09.2022" aria-label="date">
+                <input class="form-control" placeholder="Комментарий..." id="comment" aria-label="comment">
             </div>
 
             <div class="custom-action">
-                <button type="button" class="btn btn-success">Сохранить</button>
-                <button type="button" class="btn btn-danger">Отмена</button>
+                <button type="button" class="btn btn-success" id="edit-button">Сохранить</button>
+                <button type="button" class="btn btn-danger" id="decline-button">Отмена</button>
             </div>
         </div>
     </div>

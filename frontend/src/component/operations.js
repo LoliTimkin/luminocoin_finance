@@ -15,12 +15,6 @@ export class Operations {
             const buttons = document.querySelectorAll(".filter-button"); // Все кнопки
             let activeButton = document.querySelector(".filter-button.btn-secondary"); // Кнопка по умолчанию
 
-            // Функция для выполнения фильтрации
-            const applyFilter = (filterValue) => {
-                console.log(`Применение фильтра: ${filterValue}`);
-                // Логика загрузки данных для фильтра
-            };
-
             // Установить фильтр для активной кнопки по умолчанию
             if (activeButton) {
                 this.getOperationsByFilter(activeButton.dataset.filter);
@@ -81,11 +75,11 @@ export class Operations {
         const row = document.createElement('tr');
         row.innerHTML = `
                     <th scope="row">${item.id}</th>
-                    <td>${item.type}</td>
-                    <td>${categoryName}</td>
-                    <td>${item.amount}$</td>
-                    <td>${item.date}</td>
-                    <td>${item.comment}</td>
+                    <td id="type">${item.type}</td>
+                    <td id="categoryName">${categoryName}</td>
+                    <td id="amount">${item.amount}$</td>
+                    <td id="date">${item.date}</td>
+                    <td id="comment">${item.comment}</td>
                     <td>
                         <svg data-bs-toggle="modal" class="svg-remove-operation" data-bs-target="#exampleModal" width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M4.5 5.5C4.77614 5.5 5 5.72386 5 6V12C5 12.2761 4.77614 12.5 4.5 12.5C4.22386 12.5 4 12.2761 4 12V6C4 5.72386 4.22386 5.5 4.5 5.5Z"
@@ -141,7 +135,20 @@ export class Operations {
         operationsTable.addEventListener('click', (event) => {
             const icon = event.target.closest('.svg-edit-operation');
             if(icon) {
-                window.location.href = `#/operations_edit`;
+                const row = icon.closest('tr');
+                if(row) {
+                    const th = row.querySelector('th')
+                    if(th) {
+                        const operationId = th.textContent
+                        const type = (row.querySelector(`td[id="type"]`)).innerText
+                        const categoryName = (row.querySelector(`td[id="categoryName"]`)).innerText
+                        const amount = (row.querySelector(`td[id="amount"]`)).innerText
+                        const date = (row.querySelector(`td[id="date"]`)).innerText
+                        const comment = (row.querySelector(`td[id="comment"]`)).innerText
+                        if (operationId) window.location.href = `#/operations_edit?id=${operationId}&type=${type}&categoryName=${categoryName}&amount=${amount}&date=${date}&comment=${comment}`;
+                    }
+                }
+                //window.location.href = ``;
             }
         })
         operationsTable.addEventListener('click', (event) => {
@@ -176,6 +183,37 @@ export class Operations {
                     throw new Error(result.message);
                 }
 
+            }
+        } catch (error) {
+            return console.log(error)
+        }
+    }
+
+    async getCategories(){
+
+        try {
+            const income = await CustomHttp.request(config.host + `/categories/${typeOfCategory}`,
+                'GET'
+            )
+            if (income) {
+                if (options.error) {
+                    throw new Error(result.message);
+                }
+                this.income = income
+            }
+        } catch (error) {
+            return console.log(error)
+        }
+
+        try {
+            const expense = await CustomHttp.request(config.host + `/categories/expense`,
+                'GET'
+            )
+            if (income) {
+                if (options.error) {
+                    throw new Error(result.message);
+                }
+                this.expense = expense
             }
         } catch (error) {
             return console.log(error)

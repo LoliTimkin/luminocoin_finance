@@ -7,6 +7,7 @@ import {CreateCategory} from "./component/create_category.js";
 import {UpdateCategory} from "./component/update_category.js";
 import {Operations} from "./component/operations.js";
 import {CreateOperation} from "./component/create_operation.js";
+import {EditOperation} from "./component/edit_operation";
 
 export class Router {
     constructor() {
@@ -128,7 +129,7 @@ export class Router {
                 page: 'templates/operations_edit.html',
                 styles: 'css/edit_finances.css',
                 load: () => {
-
+                    new EditOperation()
                 }
             },
         ]
