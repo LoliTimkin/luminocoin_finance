@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "bootstrap": "^5.3.3",
-    "chart.js": "^4.4.4"
+    "chart.js": "^4.4.4",
+    "flatpickr": "^4.6.13"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^12.0.2",

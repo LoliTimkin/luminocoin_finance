@@ -1,11 +1,17 @@
 import {CustomHttp} from "../services/custom-http.js";
 import config from "../../config/config.js";
+//import flatpickr from "flatpickr";
+//import "flatpickr/dist/flatpickr.min.css";
+//const flatpickr = require("flatpickr");
 
 export class Operations {
     constructor() {
         this.createButtonIncome = document.getElementById('create-button-income')
         this.createButtonExpenses = document.getElementById('create-button-expense')
         this.removeModalButton = document.getElementById('modal-remove-operation')
+        let calendarDateFrom = document.getElementById('calendarFrom')
+        let calendarDateTo = document.getElementById('calendarTo')
+        this.dateRangeBtn = document.getElementById('range-calendar')
         // this.choiceWeekFilter = document.getElementById('filter-week')
         // this.choiceMonthFilter = document.getElementById('filter-month')
         // this.choiceYearFilter = document.getElementById('filter-year')
@@ -14,8 +20,49 @@ export class Operations {
         //document.addEventListener("DOMContentLoaded", () => {
             const buttons = document.querySelectorAll(".filter-button"); // Все кнопки
             let activeButton = document.querySelector(".filter-button.btn-secondary"); // Кнопка по умолчанию
+            //const calendars = document.querySelector(".calendar")
 
-            // Установить фильтр для активной кнопки по умолчанию
+        flatpickr(this.dateRangeBtn, {
+            mode: "range", // Режим выбора диапазона
+            //dateFormat: "d.m.Y", // Формат отображения даты
+            dateFormat: "Y-m-d",
+            onClose: (selectedDates)=> {
+                if (selectedDates.length === 2) {
+                    // Если выбраны обе даты, обновляем кнопки
+                    const startDate = selectedDates[0].toLocaleDateString("ru-RU"); // Первая дата
+                    const endDate = selectedDates[1].toLocaleDateString("ru-RU");   // Вторая дата
+
+                    calendarDateFrom.textContent = startDate;
+                    calendarDateTo.textContent = endDate;
+
+                    this.getOperationsByFilter("interval", selectedDates[0], selectedDates[1])
+                }
+            }
+        });
+
+/*        flatpickr(this.calendarDateFrom, {
+            //mode: "range",
+            dateFormat: "d.m.Y",
+            onClose: function(selectedDates) {
+                if (selectedDates.length === 2) {
+                    console.log("Начало:", selectedDates[0]);
+                    console.log("Конец:", selectedDates[1]);
+                }
+            }
+        });
+
+        flatpickr("this.calendarDateTo", {
+            //mode: "range",
+            dateFormat: "d.m.Y",
+            onClose: function(selectedDates) {
+                if (selectedDates.length === 2) {
+                    console.log("Начало:", selectedDates[0]);
+                    console.log("Конец:", selectedDates[1]);
+                }
+            }
+        });*/
+
+        // Установить фильтр для активной кнопки по умолчанию
             if (activeButton) {
                 this.getOperationsByFilter(activeButton.dataset.filter);
             }
@@ -31,7 +78,10 @@ export class Operations {
                         button.classList.add("btn-secondary"); // Установка класса для текущей кнопки
                         button.classList.remove("btn-outline-secondary") //  Удаление неактивного состояния
                         activeButton = button; // Обновление активной кнопки
-                        this.getOperationsByFilter(button.dataset.filter); // Применение фильтра
+                        if (button !== this.dateRangeBtn) {
+                            this.getOperationsByFilter(button.dataset.filter); // Применение фильтра
+                        }
+
                     }
                 });
             });
@@ -52,9 +102,18 @@ export class Operations {
         //this.getOperationsByFilter("day")
     }
 
-    async getOperationsByFilter(period){
+    async getOperationsByFilter(period, startDate = null, endDate = null ){
+        const queryParams = new URLSearchParams();
+        queryParams.append("period", period)
+
+        if (period === "interval") {
+            queryParams.append("dateFrom", startDate)
+            queryParams.append("dateTo", endDate)
+        }
+
         try {
-            const result = await CustomHttp.request(config.host + `/operations?period=${period}`,
+            //const result = await CustomHttp.request(config.host + `/operations?period=${period}`,
+            const result = await CustomHttp.request(config.host + `/operations?${queryParams}`,
                 'GET',
             )
             if (result) {
