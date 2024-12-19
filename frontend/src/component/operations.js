@@ -12,10 +12,6 @@ export class Operations {
         let calendarDateFrom = document.getElementById('calendarFrom')
         let calendarDateTo = document.getElementById('calendarTo')
         this.dateRangeBtn = document.getElementById('range-calendar')
-        // this.choiceWeekFilter = document.getElementById('filter-week')
-        // this.choiceMonthFilter = document.getElementById('filter-month')
-        // this.choiceYearFilter = document.getElementById('filter-year')
-        // this.choiceAllFilter = document.getElementById('filter-all')
 
         //document.addEventListener("DOMContentLoaded", () => {
             const buttons = document.querySelectorAll(".filter-button"); // Все кнопки
@@ -39,28 +35,6 @@ export class Operations {
                 }
             }
         });
-
-/*        flatpickr(this.calendarDateFrom, {
-            //mode: "range",
-            dateFormat: "d.m.Y",
-            onClose: function(selectedDates) {
-                if (selectedDates.length === 2) {
-                    console.log("Начало:", selectedDates[0]);
-                    console.log("Конец:", selectedDates[1]);
-                }
-            }
-        });
-
-        flatpickr("this.calendarDateTo", {
-            //mode: "range",
-            dateFormat: "d.m.Y",
-            onClose: function(selectedDates) {
-                if (selectedDates.length === 2) {
-                    console.log("Начало:", selectedDates[0]);
-                    console.log("Конец:", selectedDates[1]);
-                }
-            }
-        });*/
 
         // Установить фильтр для активной кнопки по умолчанию
             if (activeButton) {

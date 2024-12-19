@@ -83,16 +83,16 @@
                     Главная
                 </div>
                 <div class="custom-filters">
-                    <button type="button" class="btn btn-secondary btn-sm">Сегодня</button>
-                    <button type="button" class="btn btn-outline-secondary btn-sm">Неделя</button>
-                    <button type="button" class="btn btn-outline-secondary btn-sm">Месяц</button>
-                    <button type="button" class="btn btn-outline-secondary btn-sm">Год</button>
-                    <button type="button" class="btn btn-outline-secondary btn-sm">Все</button>
-                    <button type="button" class="btn btn-outline-secondary btn-sm">Интервал</button>
+                    <button type="button" class="btn btn-secondary btn-sm filter-button" data-filter="day">Сегодня</button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm filter-button" data-filter="week">Неделя</button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm filter-button" data-filter="month">Месяц</button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm filter-button" data-filter="year">Год</button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm filter-button" data-filter="all">Все</button>
+                    <button type="button" id="range-calendar" class="btn btn-outline-secondary btn-sm filter-button" data-filter="interval">Интервал</button>
                     <span>c</span>
-                    <button type="button" class="btn custom-text-color">Дата</button>
+                    <button type="button" id="calendarFrom" class="btn custom-text-color calendar">Дата</button>
                     <span>по</span>
-                    <button type="button" class="btn custom-text-color">Дата</button>
+                    <button type="button" id="calendarTo" class="btn custom-text-color calendar">Дата</button>
                 </div>
             <div class="row">
                 <div class="col-5 border-end">
