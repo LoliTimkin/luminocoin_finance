@@ -1,5 +1,16 @@
 import {CustomHttp} from "../services/custom-http";
 import config from "../../config/config.js";
+//import {Chart} from "chart.js";
+import {
+    Chart,
+    PieController,
+    ArcElement,
+    Tooltip,
+    Legend,
+    Title
+} from 'chart.js';
+
+Chart.register(PieController, ArcElement, Tooltip, Legend, Title);
 
 export class Main {
     constructor() {
@@ -10,6 +21,10 @@ export class Main {
 
         const buttons = document.querySelectorAll(".filter-button"); // Все кнопки
         let activeButton = document.querySelector(".filter-button.btn-secondary"); // Кнопка по умолчанию
+
+        this.incomeCategoryToPercent = {} // свойство для обработанных данных - доходы
+        this.expenseCategoryToPercent = {} // свойство для обработанных данных - расходы
+
 
         flatpickr(this.dateRangeBtn, {
             mode: "range", // Режим выбора диапазона
@@ -74,6 +89,7 @@ export class Main {
                 this.data = result
                 console.log(this.data)
                 //this.renderingPage()
+                this.calculateStatistics(this.data)
             }
         } catch (error) {
             return console.log(error)
@@ -106,80 +122,97 @@ export class Main {
         console.log(incomeCategoryCount)
         console.log(expenseCategoryCount)
 
-        const incomeCategoryToPercent = {};
+        //const incomeCategoryToPercent = {};
         for (let category in incomeCategoryCount) {
-            incomeCategoryToPercent[category] = ((incomeCategoryCount[category] / dataIncome.length) * 100).toFixed(2) + '%';
+            this.incomeCategoryToPercent[category] = ((incomeCategoryCount[category] / dataIncome.length) * 100).toFixed(2) ;
         }
 
-        const expenseCategoryToPercent = {};
+        //const expenseCategoryToPercent = {};
         for (let category in expenseCategoryCount) {
-            expenseCategoryToPercent[category] = ((expenseCategoryCount[category] / dataExpense.length) * 100).toFixed(2) + '%';
+            this.expenseCategoryToPercent[category] = ((expenseCategoryCount[category] / dataExpense.length) * 100).toFixed(2);
         }
-        console.log(incomeCategoryToPercent)
-        console.log(expenseCategoryToPercent)
+        console.log(this.incomeCategoryToPercent)
+        console.log(this.expenseCategoryToPercent)
+
+            this.createCharts()
     }
+
+    createCharts() {
+        const ctx = document.getElementById('myChart');
+        const ctx2 = document.getElementById('myChart2');
+
+        console.log(Object.values(this.incomeCategoryToPercent))
+        const incomeData = {
+            labels: Object.keys(this.incomeCategoryToPercent),
+            datasets: [
+                {
+                    label: "Доходы",
+                    data: Object.values(this.incomeCategoryToPercent),
+                    backgroundColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(255, 159, 64)',
+                        'rgb(255, 205, 86)',
+                        'rgb(75, 192, 192)',
+                        'rgb(54, 162, 235)'
+                    ]
+                }
+            ]
+        };
+
+        const expenseData = {
+            labels: Object.keys(this.expenseCategoryToPercent),
+            datasets: [
+                {
+                    label: "Расходы",
+                    data: Object.values(this.expenseCategoryToPercent),
+                    backgroundColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(255, 159, 64)',
+                        'rgb(255, 205, 86)',
+                        'rgb(75, 192, 192)',
+                        'rgb(54, 162, 235)'
+                    ]
+                }
+            ]
+        };
+
+        if (this.myChart) {
+            this.myChart.destroy(); // Удаляем предыдущий график
+        }
+        this.myChart = new Chart(ctx, {
+            type: 'pie',
+            data: incomeData,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'top' },
+                    title: { display: true, text: 'Доходы' }
+                }
+            }
+        });
+
+         if (this.myChart2) {
+            this.myChart2.destroy(); // Удаляем предыдущий график
+        }
+        this.myChart2 = new Chart(ctx2, {
+            type: 'pie',
+            data: expenseData,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {position: 'top'},
+                    title: {display: true, text: 'Расходы'}
+                }
+            }
+        });
+    }
+
 }
 
 const DATA_COUNT = 5;
 const NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 100};
 
-const data = {
-    labels: ['Red', 'Orange', 'Yellow', 'Green', 'Blue'],
-    datasets: [
-        {
-            label: 'Dataset 1',
-            data: [10, 20, 30, 15, 25],
-            backgroundColor: [
-                'rgb(255, 99, 132)',
-                'rgb(255, 159, 64)',
-                'rgb(255, 205, 86)',
-                'rgb(75, 192, 192)',
-                'rgb(54, 162, 235)'
-            ],
-        }
-    ]
-};
-
-export const configCanvas = {
-    type: 'pie',
-    data: data,
-    options: {
-        responsive: true,
-        plugins: {
-            legend: {
-                position: 'top',
-            },
-            title: {
-                display: true,
-                text: "Доходы"
-            }
-        }
-    },
-};
-
-//const myChart = new Chart(ctx, config);
-
-export const configCanvas2 = {
-    type: 'pie',
-    data: data,
-    options: {
-        responsive: true,
-        plugins: {
-            legend: {
-                position: 'top',
-            },
-            title: {
-                display: true,
-                text: "Расходы"
-            }
-        }
-    },
-};
-
-//const myChart2 = new Chart(ctx2, config2);
-
-
- export const testData = [
+export const testData = [
     {
         "id": 8,
         "type": "income",
@@ -221,6 +254,7 @@ export const configCanvas2 = {
         "category": "Графика"
     }
 ];
+
 
 
 

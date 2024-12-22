@@ -23,46 +23,7 @@ export class Router {
                 styles: 'css/main.css',
                 load: () => {
                     new Sidebar();
-                    new Main();
-                    const ctx = document.getElementById('myChart');
-                    const ctx2 = document.getElementById('myChart2');
-                    const myChart = new Chart(ctx, configCanvas);
-                    const myChart2 = new Chart(ctx2, configCanvas2);
-                    console.log(testData)
-                    const dataIncome = testData.filter(item=> {
-                        return item.type === "income"
-                    })
-                    console.log(dataIncome)
-                    const dataExpense = testData.filter(item=> {
-                        return item.type === "expense"
-                    })
-                    console.log(dataExpense)
-
-                    const incomeCategoryCount = {};
-                    const expenseCategoryCount = {};
-
-                    dataIncome.forEach(item => {
-                        incomeCategoryCount[item.category] = (incomeCategoryCount[item.category] || 0) + 1;
-                    });
-
-                    dataExpense.forEach(item => {
-                        expenseCategoryCount[item.category] = (expenseCategoryCount[item.category] || 0) + 1;
-                    });
-
-                    console.log(incomeCategoryCount)
-                    console.log(expenseCategoryCount)
-
-                    const incomeCategoryToPercent = {};
-                    for (let category in incomeCategoryCount) {
-                        incomeCategoryToPercent[category] = ((incomeCategoryCount[category] / dataIncome.length) * 100).toFixed(2) + '%';
-                    }
-
-                    const expenseCategoryToPercent = {};
-                    for (let category in expenseCategoryCount) {
-                        expenseCategoryToPercent[category] = ((expenseCategoryCount[category] / dataExpense.length) * 100).toFixed(2) + '%';
-                    }
-                    console.log(incomeCategoryToPercent)
-                    console.log(expenseCategoryToPercent)
+                    const main = new Main();
                 }
             },
             {
