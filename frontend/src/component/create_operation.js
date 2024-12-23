@@ -1,17 +1,35 @@
 import {CustomHttp} from "../services/custom-http.js";
 import config from "../../config/config.js";
+import flatpickr from "flatpickr";
 
 export class CreateOperation {
     constructor() {
         //this.page = page
+        const hash = window.location.hash
+        const queryString = hash.split("?")[1]
+        const params = new URLSearchParams(queryString)
+        const type = params.get("type")
+
         this.createButton = document.getElementById('create-operation');
         this.declineButton = document.getElementById('decline-button');
 
         this.inputTypeOperation = document.getElementById('input-category-type')
+        this.inputTypeOperation.value = type
         this.inputCategoryOperation = document.getElementById('input-category-name')
         this.inputSumOperation = document.getElementById('input-sum-operation')
         this.inputDateOperation = document.getElementById('input-date-operation')
+        flatpickr(this.inputDateOperation, {
+            mode: "single",
+            dateFormat: "Y-m-d",
+            onClose: (selectedDate)=> {
+                if (selectedDate) {
+                    this.inputDateOperation.textContent = selectedDate;
+                }
+            }
+        });
         this.inputCommentOperation = document.getElementById('input-comment-operation')
+
+        this.getCategories()
 
         this.inputTypeOperation.addEventListener("change", (event) => {
             this.getCategories()

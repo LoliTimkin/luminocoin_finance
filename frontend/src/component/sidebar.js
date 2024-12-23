@@ -1,8 +1,11 @@
 import {CustomHttp} from "../services/custom-http.js";
+import {Auth} from "../services/auth";
 
 export class Sidebar {
     constructor() {
         this.balance = document.getElementById('balance-value');
+        const userElement = document.querySelector('.custom-user span');
+        userElement.innerText = (Auth.getUserInfo()).name
         this.getBalance();
         this.buttons = document.querySelectorAll('.nav-link')
         //const that = this.buttons
@@ -31,6 +34,7 @@ export class Sidebar {
             return console.log(error)
         }
     }
+
 
 
 }

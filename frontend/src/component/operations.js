@@ -62,10 +62,10 @@ export class Operations {
         //});
 
         this.createButtonIncome.addEventListener('click', () => {
-                window.location.href = `#/operations_create`;
+                window.location.href = `#/operations_create?type=income`;
         })
         this.createButtonExpenses.addEventListener('click', () => {
-                window.location.href = `#/operations_create`;
+                window.location.href = `#/operations_create?type=expense`;
         })
         this.removeModalButton.addEventListener('click', () => {
             this.deleteOperation()

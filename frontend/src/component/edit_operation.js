@@ -1,5 +1,6 @@
 import {CustomHttp} from "../services/custom-http";
 import config from "../../config/config";
+import flatpickr from "flatpickr";
 
 
 export class EditOperation {
@@ -10,6 +11,7 @@ export class EditOperation {
         this.operationId = params.get('id');
         this.type = params.get('type');
         const categoryName = params.get('categoryName');
+        //this.categoryName = params.get('categoryName');
         const amount = params.get('amount');
         const date = params.get('date');
         const comment = params.get('comment');
@@ -18,10 +20,20 @@ export class EditOperation {
         this.inputType.value = (this.type === "income")? "Доход": "Расход";
         this.inputCategoryName = document.getElementById('categoryName')
         this.inputCategoryName.value = categoryName
+        //this.getCategories()
         this.inputAmount = document.getElementById('amount')
         this.inputAmount.value = amount
         this.inputDate = document.getElementById('date')
         this.inputDate.value = date
+        flatpickr(this.inputDate, {
+            mode: "single",
+            dateFormat: "Y-m-d",
+            onClose: (selectedDate)=> {
+                if (selectedDate) {
+                    this.inputDate.textContent = selectedDate;
+                }
+            }
+        });
         this.inputComment = document.getElementById('comment')
         this.inputComment.value = comment
 
@@ -30,6 +42,7 @@ export class EditOperation {
 
         this.editButton.addEventListener('click', () => {
             this.getCategoriesPreUpdate()
+            //this.updateOperation(this.inputCategoryName.value)
         })
 
         this.declineButton.addEventListener('click', function() {
@@ -55,6 +68,7 @@ export class EditOperation {
                 if (result.error) {
                     throw new Error(result.message);
                 }
+                window.location.href = "#/finances_and_expenses"
             }
         } catch (error) {
             return console.log(error)
@@ -86,4 +100,33 @@ export class EditOperation {
             return console.log(error)
         }
     }
+
+   /* async getCategories(){
+        const typeOfCategory = this.type
+
+        try {
+            const options = await CustomHttp.request(config.host + `/categories/${typeOfCategory}`,
+                'GET'
+            )
+            if (options) {
+                if (options.error) {
+                    throw new Error(result.message);
+                }
+
+                if (options.length > 0) {
+                    options.forEach(option => {
+                        const optionElement = document.createElement('option');
+                        optionElement.value = option.id;
+                        optionElement.textContent = option.title;
+                        if(option.title === this.categoryName) {optionElement.selected=true}
+                        this.inputCategoryName.appendChild(optionElement);
+                    });
+                } else {
+                    this.inputCategoryName.innerHTML = '<option value="">Нет доступных вариантов</option>';
+                }
+            }
+        } catch (error) {
+            return console.log(error)
+        }
+    }*/
 }
