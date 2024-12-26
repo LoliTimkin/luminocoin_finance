@@ -122,11 +122,13 @@ export class Main {
         console.log(incomeCategoryCount)
         console.log(expenseCategoryCount)
 
+        this.incomeCategoryToPercent = {}
         //const incomeCategoryToPercent = {};
         for (let category in incomeCategoryCount) {
             this.incomeCategoryToPercent[category] = ((incomeCategoryCount[category] / dataIncome.length) * 100).toFixed(2) ;
         }
 
+        this.expenseCategoryToPercent = {}
         //const expenseCategoryToPercent = {};
         for (let category in expenseCategoryCount) {
             this.expenseCategoryToPercent[category] = ((expenseCategoryCount[category] / dataExpense.length) * 100).toFixed(2);

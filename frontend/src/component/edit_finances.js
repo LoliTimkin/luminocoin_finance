@@ -20,7 +20,9 @@ export class EditFinances {
         } else {
             this.typeOfCategory = "income"
         }
-         this.data = [
+
+        this.data = []
+/*         this.data = [
             { "id": 1, "title": "Депозиты" },
             { "id": 2, "title": "Зарплата" },
             { "id": 3, "title": "Сбережения" },
@@ -40,7 +42,7 @@ export class EditFinances {
                 { "id": 8, "title": "Счета" },
                 { "id": 9, "title": "Спорт" }
             ];
-        }
+        }*/
          this.cardsGenerator()
     }
 
@@ -141,6 +143,29 @@ export class EditFinances {
         const params = new URLSearchParams(queryString);
         const categoryId = params.get('id');
         //document.getElementById('category-name-input').value = categoryName || '';
+        const categoryName = params.get('category')
+
+        try {
+            //const result = await CustomHttp.request(config.host + `/operations?period=${period}`,
+            const result = await CustomHttp.request(config.host + `/operations?period=all`,
+                'GET',
+            )
+            if (result) {
+                if (result.error) {
+                    throw new Error(result.message);
+                }
+                const operationsData = result
+                console.log(operationsData)
+                //this.operationsDataByCategory
+                operationsData.forEach(operation => {
+                    if (operation.category === categoryName) {this.deleteOperationById(operation.id)}
+                })
+                //console.log(this.operationsDataByCategory)
+
+            }
+        } catch (error) {
+            return console.log(error)
+        }
 
         try {
             const result = await CustomHttp.request(`http://localhost:3000/api/categories/${this.typeOfCategory}/${categoryId}`,
@@ -149,6 +174,23 @@ export class EditFinances {
                 if (result.error) {
                     throw new Error(result.message);
                 }
+            }
+        } catch (error) {
+            return console.log(error)
+        }
+    }
+
+    async deleteOperationById(operationId) {
+
+        try {
+            const result = await CustomHttp.request(config.host + `/operations/${operationId}`,
+                'DELETE',
+            )
+            if (result) {
+                if (result.error) {
+                    throw new Error(result.message);
+                }
+
             }
         } catch (error) {
             return console.log(error)

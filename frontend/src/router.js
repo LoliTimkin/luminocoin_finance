@@ -50,7 +50,7 @@ export class Router {
                 page: 'templates/finances.html',
                 styles: 'css/finances.css',
                 load: () => {
-
+                    new Sidebar();
                     new EditFinances("finances");
                 }
             },
@@ -60,6 +60,7 @@ export class Router {
                 page: 'templates/edit_finances.html',
                 styles: 'css/edit_finances.css',
                 load: () => {
+                    new Sidebar();
                     new UpdateCategory("finances")
                     //document.getElementById("edit_category_name").value="Зарплата";
                 }
@@ -70,6 +71,7 @@ export class Router {
                 page: 'templates/create_finances.html',
                 styles: 'css/edit_finances.css',
                 load: () => {
+                    new Sidebar();
                     new CreateCategory("finances")
                 }
             },
@@ -79,6 +81,7 @@ export class Router {
                 page: 'templates/expenses.html',
                 styles: 'css/finances.css',
                 load: () => {
+                    new Sidebar();
                     new EditFinances("expenses");
                 }
             },
@@ -88,6 +91,7 @@ export class Router {
                 page: 'templates/create_expenses.html',
                 styles: 'css/edit_finances.css',
                 load: () => {
+                    new Sidebar();
                     new CreateCategory("expenses")
                 }
             },
@@ -97,6 +101,7 @@ export class Router {
                 page: 'templates/edit_expenses.html',
                 styles: 'css/edit_finances.css',
                 load: () => {
+                    new Sidebar();
                     new UpdateCategory("expenses")
                     //document.getElementById("edit_expenses_name").value="Жильё";
                 }
@@ -117,6 +122,7 @@ export class Router {
                 page: 'templates/operations_create.html',
                 styles: 'css/edit_finances.css',
                 load: () => {
+                    new Sidebar();
                     new CreateOperation()
                 }
             },
@@ -126,6 +132,7 @@ export class Router {
                 page: 'templates/operations_edit.html',
                 styles: 'css/edit_finances.css',
                 load: () => {
+                    new Sidebar();
                     new EditOperation()
                 }
             },
